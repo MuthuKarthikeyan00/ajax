@@ -1,0 +1,3828 @@
+
+
+
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+<script  src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<?php
+ini_set("display_errors",1);
+
+?>
+<?php
+
+ini_set('display_errors', '1');
+require_once('../class/ListBulider.php');
+ 
+?>
+<style>
+/*    .table-responsive{*/
+/*  overflow:scroll;*/
+/*}*/
+/* thead tr:nth-child(1) th{*/
+    /*background: white;*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    z-index: 10;*/
+/*  }*/
+/*  .{*/
+/*    height: 28px;*/
+/*    padding: 1px 3px;*/
+/*  }
+  .info {background-color: #2196F3;} /* */
+
+
+            #tt_max{
+                
+
+            max-height:150px !important;
+            text-align:center !important;
+            overflow:scroll;
+            }
+
+            #sub_table_1{
+               width: 100% !important;
+
+            }
+            
+            .my_color{
+                
+              color: hsl(342,55%,44%) !important;
+
+            }
+  
+  /*sub_table tr:nth-child(1){*/
+  /*  background: white;*/
+  /*  position: sticky;*/
+  /*  top: 0;*/
+  /*  z-index: 10;*/
+  /*}*/
+  
+  
+  #stik_tab {
+      background:  hsl(342,55%,44%);
+       position: sticky;
+       top: 0;
+  }
+  
+  .ho_1:hover{
+      background-color: rgb(246, 237, 237) !important;
+  }
+        
+    .my_bg{
+        
+      background-color: hsl(342,55%,44%) !important;
+
+         }
+  
+  
+  
+</style>
+<script src="../assets/js/sweetalert.js"></script>
+
+
+<?php
+if(isset($_GET['approve_move']))
+{
+  $approve_move_id = $_GET['approve_move'];
+  
+  
+  
+    $approve_move_id = $_GET['approve_move'];
+  
+  $data1 = $db1->sql("select * from sm_main_form_3061 where id=$approve_move_id")->one(); 
+  
+?>
+<div class="card-head">
+	
+	
+	<ul class="nav nav-tabs card-header-tabs">
+ <li class="nav-item">
+      
+    <a class="nav-item nav-link logo-default"  aria-selected="false">  Purchas Order-3065 </a>
+      </li>
+     
+      <li class="nav-item">
+          <a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="false"> EDIT <i class="fa fa-edit"></i> </a>
+      </li>
+ 
+  <li class="nav-item"><button type="button" class="btn btn-danger" id="balance"> </button></li>    
+  <li class="nav-item"><button type="button" class="btn btn-success" id="purprice"></button></li>    
+  <li class="nav-item"><button type="button" class="btn btn-warning" id="ttqty"> </button></li>    
+    </ul>
+  
+ 
+  
+</div>
+
+<div class="card-body ">
+<div class="tab-content" id="nav-tabContent">
+
+  
+<div class="tab-pane fade  show active" id="nav-add" role="tabpanel" aria-labelledby="nav-profile-tab"> 
+ <!--<span class="label success" id="stock" ></span>-->
+<form  method="post" onkeypress="return event.keyCode != 13;" id="purchesh_order">
+  
+    
+  <input type="hidden" id="cid" name="cid" value="28754745">
+  <input type="hidden" id="uid" name="uid" value="">
+  <input type="hidden" id="add_new" name="save" value="1">
+     <input type="hidden" id="mcat_id" value="0">
+
+    
+<div class="form-row">
+<div class="col">
+      
+ 
+
+    <!-------------------------2--------------------------------->
+
+  <div class="row">
+      
+      
+      <div class="col">
+          
+        <div class="row m-1">
+           
+              <label class="" name="Item_Group">Date</label>
+              <input class="form-control entab date form_date" required name="date" id="date"  value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" > 
+           
+        </div>
+
+        
+        <div class="row m-1">
+           
+              <label class=" form-label">PO No</label>
+        <input type="text" class="form-control  entab " value="<?php echo $approve_move_id; ?>" readonly name="po_no"
+          id="po_no">
+        <input type="hidden" class="form-control  entab " value="<?php echo $data1['id']; ?>" name="mid" id="mid">
+           
+        </div>
+        
+         <div class="row m-1">
+               <label class=" form-label">Supplier</label>
+            <input type="text" class="form-control  entab  " name="Supplier" id="Supplier">
+        </div>
+        <div class="row m-1">
+            <label class=" form-label">Supplier Address</label>
+      
+        <textarea class="form-control  entab  " name="supplier_address" id="supplier_address">
+             </textarea>
+        </div>
+        
+          
+      </div>
+      
+           <div class="col">
+          
+        <div class="row m-1">
+            <label class=" form-label">Site (Delivery To)</label>
+            <input type="text" class="form-control  entab  " name="site_del_to" id="site_del_to">
+        </div>
+        <div class="row m-1">
+             <label class=" form-label">delivery Address</label>
+             <textarea class="form-control  entab  " name="delivery_address" id="delivery_address">
+             </textarea>
+       
+        </div>
+   
+        
+            <div class="row m-1">
+           
+            <label class=" form-label">Reference</label>
+        <input type="text" class="form-control  entab  " name="Reference" id="Reference">
+        
+        </div>
+                
+        <div class="row m-1">
+            
+            <label class=" form-label">Request Date</label>
+        <input class="form-control entab date form_date" required name="request_date" id="request_date"
+          value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" >
+          
+        </div>
+        
+          
+      </div>
+      
+      
+      <div class="col">
+          
+        <div class="row m-1">
+            <label class=" form-label">Terms of Payment</label>
+            
+        <!--<input type="text" class="form-control  entab  " name="terms_payment" id="terms_payment">-->
+              
+        <select class="select2 form-control"  id="terms_payment" name="terms_payment">
+
+<option value='0'>Select</option>
+
+<?php 
+ 
+         $machine = $db1->from('sm_main_form_3008')->where('del #',null)->many();
+  
+         foreach($machine as $p){
+?>
+
+ <option value="<?php echo $p['terms']; ?>">
+  <?php echo $p['terms']; ?>
+ </option>
+<?php } ?>
+</select>
+           
+        
+        
+        </div>
+        <div class="row m-1">
+                                       <label class=" form-label">Dispatch Through</label>
+                                 <select class="select2 form-control"  id="dispatch_through" name="dispatch_through">
+
+<option value='0'>Select</option>
+
+<?php 
+ 
+         $machine = $db1->from('sm_main_form_3007')->where('del #',null)->many();
+  
+         foreach($machine as $p){
+?>
+
+ <option value="<?php echo $p['name']; ?>">
+  <?php echo $p['name']; ?>
+ </option>
+<?php } ?>
+</select>
+        </div>
+        <div class="row m-1">
+          
+        <label class=" form-label">Vehicle Type</label>
+        <select class=" select2 estab form-control " id="vehicle_delivery" name="vehicle_delivery">
+          <option value='1'>own pick up</option>
+          <option value='2' selected='selected'> party delivery</option>
+        </select>
+        </div>
+        <div class="row m-1">
+             <label class=" form-label">delivery Date</label>
+        <input class="form-control entab date form_date" required name="delivery_date" id="delivery_date"
+          value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" >
+        </div>
+        
+          
+      </div>
+      
+
+      
+                
+  </div>
+
+
+</div>
+
+
+
+
+<div class="table-responsive mt-5 p-2" >
+        
+<table id="table" class="table table-bordered">
+      <thead>
+        <tr>
+          <th><input type="checkbox" class="delall"></th>
+          <!--<th>Site</td>-->
+          <th>Item Group</td>
+          <th>Item</td>
+          <th>UOM</td>
+          <th>Brand</td>
+            <th>Description</td>
+          <th>Quantity</td>
+      <th>Price</th>
+      <th>Discount</th>
+      <th hidden>Tax</th>
+      <th>Total</th>
+      </tr>
+      </thead>
+      <tbody id="demo">
+        
+        </tbody>
+</table>
+</div>      
+
+</div>
+
+
+
+
+  <div class="row"  style="padding: 30px 0px 0 0">
+        
+        
+        <div class="col-2">
+        <div align="center">
+            <button class="btn btn-danger deletee" type="button">- Del</button>
+            <button class="btn btn-success addmore" type="button">+ Add</button>
+        </div>
+        </div>
+ 
+ 
+    <div  class="col-3 pr-3  input-group">
+    
+
+           <div class="row border p-2">
+    <table  class="table">
+        <thead>
+            <th>
+               <input type="checkbox" class="delall_sub" id="main_check">
+            </th>
+            <th width="50%">
+                Terms
+            </th>
+            <th  width="50%">
+              Sub  Terms
+            </th>
+        </thead>
+        <tbody>
+                 <tr>
+                <td>  <input type="checkbox" class="delall_sub" name="cb_gst_print" id="cb_gst_print" value="1"> </td>
+                <td>GST </td>
+                <td>
+                    <select class=" select2 estab form-control" id="gst_print" name="gst_print">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_loading" id="cb_loading" value="1"> </td>
+                <td>LOADING</td>
+                <td>
+                    <select class=" select2 estab form-control" id="loading" name="loading">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_transport_charge" id="cb_transport_charge" value="1"> </td>
+                <td>TRANSPORT CHARGE </td>
+                <td>
+                    <select class=" select2 estab form-control" id="transport_charge" name="transport_charge">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_unloading" id="cb_unloading" value="1"> </td>
+                <td>UNLOADING </td>
+                <td>
+                    <select class=" select2 estab form-control" id="unloading" name="unloading">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+       
+        </tbody>
+    </table>
+   </div>
+
+</div>
+
+
+       <div class="modal" id="mymodal11">
+ <div class="modal-dialog" style="max-width:35%;height:100vh !important"  role="document">
+    <div class="modal-content"  width="330" >
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+    
+      <!-- Modal body -->
+      <div class="modal-body sent1" >
+
+
+         <div class="container ">
+             
+             <div class="row border">
+                 
+                 <div style="padding:10px 10px" class="col-8 border rounded-3">
+                     
+                     <h1 style="padding:20px 0px 30px 0px;font-size:40px">Purchase Order</h1>
+                    
+                     <div style="border-bottom:solid 3px hsl(342,55%,44%);padding:2px" class="d-flex justify-content-between">
+                          <h4 id="main_head_no">#<span></span></h4>
+                          <h4 id="main_head_date">02-02-2022</h4>
+                     </div>
+                     
+                     <div class="d-flex justify-content-between p-2 border-bottom">
+                         <div class=" border-right p-2">
+                             <h5>Total</h5>
+                            <p id="head_total">756.879</p>
+                         </div>
+                          <div class=" border-right p-2">
+                             <h5>Net</h5>
+                            <p id="head_net">756.879</p>
+                         </div>
+                          <div class=" border-right p-2">
+                             <h5>Due Date</h5>
+                            <p id="head_date">756.879</p>
+                         </div>
+                          <div class=" p-2">
+                             <h5>PO</h5>
+                            <p id="head_pol">756.879</p>
+                         </div>
+                     </div>
+                     <!--<hr class="bg-danger" style="padding:2px" >-->
+                     
+                 </div>
+                 
+              <div class="col-4 border pt-4 ">
+               <div>
+                     <h3 class="my_color" id="head_title">
+                           chennai silks
+                     </h3>
+                     <p style="border:none" id="head_address" readonly></p>
+               </div>
+               <div>
+                    <label  style="font-size:13px;" class="" name="">Supplier</label>
+                     <h6 class="" id="head_suplier">
+                           chennai silks
+                     </h6>
+                     
+               </div>
+                 </div>
+                 
+             </div>
+             
+              <div class="row border">
+                 
+        <div class="col border">
+                     
+                 </div>
+                 
+                 <div class="col border">
+                     
+                 </div>
+                 
+             </div>
+             
+              <div id="tt_max" class="mt-2">
+                 
+      <table id="sub_table_1" class="">
+        <!--<thead style=" color: white !important" class="my_bg ">-->
+        <!--  <tr style=" color: white !important;width:100% !important;">-->
+        <!--    <th style=" color: white !important" class="p-2">Site</th>-->
+        <!--    <th style=" color: white !important" class="p-2">ITEM</th>-->
+        <!--    <th style=" color: white !important" class="p-2">UOM</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Brand</th>-->
+        <!--    <th style=" color: white !important" class="p-2">QNT</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Price</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Discount</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Total</th>-->
+        <!--  </tr>-->
+        <!--</thead>-->
+        <tbody id="sub_table">
+
+        </tbody>
+      </table>
+           
+             </div>
+             
+         </div>
+
+  <div class=" d-flex justify-content-between">
+      
+      <div></div>
+      <div class="pt-2">
+         <div style="border-bottom:solid 2px ">
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label style="font-size:13px;" class="" name="">SUBTOTAL :</label>
+                  </div>
+                  <div class="ml-5">
+                       <label id="subtotal" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <hr>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label class="" name="">GST :</label>
+                  </div>
+                <div class="ml-5">
+                      <label id="gst" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label id="gst_type_1" class="" name="">SGST / CGST :</label>
+                  </div>
+                 <div class="ml-5">
+                       <label id="gst_value_1" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label class="" name="">TOTAL :</label>
+                  </div>
+           <div class="ml-5">
+                       <label id="bottom_total" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+         </div>
+         <div>
+                 <div class=" d-flex justify-content-between align-items-center mt-2">
+                  <div>
+                       <label class="" name="">AMOUNT :</label>
+                  </div>
+           <div class="ml-5">
+                       <label id="bottom_amount" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+         </div>
+      </div>
+      
+  </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+  <input  type="button" name="save_form"  id="save_form" value="purchesh order" class="btn btn-success" />
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+       <div class='col-4'>
+    
+          
+      <div class='input-group row'>
+
+           <div class="col-4">
+               
+                     <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Freight</div>
+							          <input type="number" class="form-control changesno_new" value=0  placeholder="Freight Charges" name="freight_charges" id="freight_charges">
+										
+                       </div>
+               
+
+          </div>
+               <div class="col-4">   
+                        <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Loading</div>
+							                 <input type="number" value=0  class="form-control changesno_new" placeholder="Loading Charges" name="loading_charges" id="loading_charges">
+                       </div>
+
+            </div>  
+                       <div class="col-4">   
+                        <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Discount</div>
+							                 <input type="number" value=0  class="form-control changesno_new" placeholder="Discount" name="discount" id="discount">
+                       </div>
+
+            </div> 
+          
+          </div>
+          
+              <br>
+          
+      <div class='input-group row'>
+          <div class="col-4">
+          TAX TYPE 
+          </div>
+               <div class="col-8">   
+               <select class=" select2 estab form-control changesno_new" id="mtax_type" name="mtax_type">-->
+                <option   value='1'>Include  Tax</option>
+                <option   value='2' >Exclude Tax</option> 
+                </select>
+            </div>     
+         
+          
+          </div>
+          
+               <br>
+          
+      <div class='input-group row'>
+          <div class="col-4">
+          GST 
+          </div>
+               <div class="col-3">           <input type="number" min="0" max="100" class="form-control changesno_new " placeholder="%" name="gst1" value=100 id="gst1"> 
+            </div>     
+             <div class="col-5">     <input type="text" class="form-control changesno_new" placeholder=" GST VALUE" name="gst_value" id="gst_value"> 
+            </div> 
+          
+          </div>
+          
+         <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+        NON  GST 
+          </div>
+               <div class="col-3">           <input type="number" min="0" max="100" class="form-control changesno_new" placeholder="%" name="gst2" id="gst2"> 
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control changesno_new"   placeholder="NON GST VALUE"  name="non_gst_value" id="non_gst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+       SGST 
+          </div>
+               <div class="col-3">      
+               
+                        <select class="form-control changesno_new"  name="sgst1" id="sgst1">
+                            <option value="0">0%</option>
+                            <option value="2.5">2.5%</option>
+                            <option value="6">6%</option>
+                            <option value="9">9%</option>
+                            <option value="14">14%</option>
+                        </select>
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control "  placeholder="sgst amount"  name="sgst_value" id="sgst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+      CGST 
+          </div>
+               <div class="col-3">        
+                     
+                      <select class="form-control changesno_new"  name="cgst1" id="cgst1">
+                        <option value="0">0%</option>
+                        <option value="2.5">2.5%</option>
+                        <option value="6">6%</option>
+                        <option value="9">9%</option>
+                        <option value="14">14%</option>
+                    </select>
+            </div>     
+             <div class="col-5">         
+                   <input type="text" class="form-control changesno_cs_value"   placeholder="cgst amount"  name="cgst_value" id="cgst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+              
+    IGST 
+    
+          </div>
+               <div class="col-3">       
+                <select class="form-control changesno_new"  name="igst1" id="igst1">
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="12">12%</option>
+                    <option value="18">18%</option>
+                    <option value="28">28%</option>
+                </select>
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control changesno_cs_value"   placeholder="igst amount"  name="igst_value" id="igst_value"> 
+            </div> 
+          
+          </div>
+          
+    
+    
+    
+      
+      </div>
+      
+      <div align="right" class='col-2'>
+          
+                
+    
+   
+              
+              
+        <div   class="row">
+     
+         <div>
+              <input style="color:blue; font-size:30px;font-weight:bold;text-align:right;max-width:250px" class="form-control" name="totalaftertax"
+            id="totalAftertax" readonly placeholder="Total">
+         </div>
+          <input type="hidden" class="hid_input" id="o_total">
+          <input type="hidden" class="hid_input" name="totalpv" id="totalpv">
+        </div>
+    <br>
+          
+        <div class="row">
+             <input  type="button" name="prv_btn"  id="prv_btn" value="preview" class="btn btn-info" />
+        </div> 
+          
+          
+      </div>
+      
+      
+
+    
+      </div>
+
+</form>
+
+  </div>
+</div>
+
+</div>
+<?php
+}
+elseif(isset($_GET['move'])){
+    
+     
+?>
+
+
+     <li class="nav-item">
+          <a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="false"> EDIT <i class="fa fa-edit"></i> </a>
+      </li>
+      
+<div class="tab-pane fade show active " id="nav-add" role="tabpanel" aria-labelledby="nav-profile-tab"> 
+
+<form  method="post"  id="purchesh_order">
+    
+  <input type="hidden" id="cid" name="cid" value="28754745">
+  <input type="hidden" id="uid" name="uid" value="">
+  <input type="hidden" id="add_new" name="save" value="1">
+     <input type="hidden" id="mcat_id" value="0">
+     
+     
+     
+     
+     <input type="hidden" name="comp_tab_id" id="comp_tab_id" value=<?php echo $_GET['move'] ;?>>
+     <input type="hidden" name="comp_tab_id2" id="comp_tab_id2" value=<?php echo $_GET['id'] ;?>>
+     
+     
+     
+
+    
+ 
+<div class="form-row">
+<div class="col">
+      
+ 
+
+    <!-------------------------2--------------------------------->
+
+     <div class="row">
+      
+      
+      <div class="col">
+          
+        <div class="row m-1">
+           
+              <label class="" name="Item_Group">Date</label>
+              <input class="form-control entab date form_date" required name="date" id="date"  value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" > 
+           
+        </div>
+
+        
+        <div class="row m-1">
+           
+              <label class=" form-label">PO No</label>
+        <input type="text" class="form-control  entab " value="<?php echo $approve_move_id; ?>" readonly name="po_no"
+          id="po_no">
+        <input type="hidden" class="form-control  entab " name="mid" id="mid">
+           
+        </div>
+        
+         <div class="row m-1">
+               <label class=" form-label">Supplier</label>
+            <input type="text" class="form-control  entab  " readonly name="Supplier" id="Supplier">
+        </div>
+        <div class="row m-1">
+            <label class=" form-label">Supplier Address</label>
+      
+        <textarea class="form-control  entab  " name="supplier_address" readonly id="supplier_address">
+             </textarea>
+        </div>
+        
+          
+      </div>
+      
+           <div class="col">
+          
+        <div class="row m-1">
+            <label class=" form-label">Site (Delivery To)</label>
+            <input type="text" class="form-control  entab  " name="site_del_to" id="site_del_to">
+        </div>
+        <div class="row m-1">
+             <label class=" form-label">delivery Address</label>
+             <textarea class="form-control  entab  " name="delivery_address" id="delivery_address">
+             </textarea>
+       
+        </div>
+   
+        
+            <div class="row m-1">
+           
+            <label class=" form-label">Reference</label>
+        <input type="text" class="form-control  entab  " name="Reference" id="Reference">
+        
+        </div>
+                
+        <div class="row m-1">
+            
+            <label class=" form-label">Request Date</label>
+        <input class="form-control entab date form_date" required name="request_date" id="request_date"
+          value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" >
+          
+        </div>
+        
+          
+      </div>
+      
+      
+      <div class="col">
+          
+        <div class="row m-1">
+            <label class=" form-label">Terms of Payment</label>
+        <select class="select2 form-control"  id="terms_payment" name="terms_payment">
+
+<option value='0'>Select</option>
+
+<?php 
+ 
+         $machine = $db1->from('sm_main_form_3008')->where('del #',null)->many();
+  
+         foreach($machine as $p){
+?>
+
+ <option value="<?php echo $p['terms']; ?>">
+  <?php echo $p['terms']; ?>
+ </option>
+<?php } ?>
+</select>
+        </div>
+        <div class="row m-1">
+                                        <label class=" form-label">Dispatch Through</label>
+                                 <select class="select2 form-control"  id="dispatch_through" name="dispatch_through">
+
+<option value='0'>Select</option>
+
+<?php 
+ 
+         $machine = $db1->from('sm_main_form_3007')->where('del #',null)->many();
+  
+         foreach($machine as $p){
+?>
+
+ <option value="<?php echo $p['name']; ?>">
+  <?php echo $p['name']; ?>
+ </option>
+<?php } ?>
+</select>
+        </div>
+        <div class="row m-1">
+          
+        <label class=" form-label">Vehicle Type</label>
+        <select class=" select2 estab form-control " id="vehicle_delivery" name="vehicle_delivery">
+          <option value='1'>own pick up</option>
+          <option value='2' selected='selected'> party delivery</option>
+        </select>
+        </div>
+        <div class="row m-1">
+             <label class=" form-label">delivery Date</label>
+        <input class="form-control entab date form_date" required name="delivery_date" id="delivery_date"
+          value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" >
+        </div>
+        
+          
+      </div>
+      
+
+      
+                
+  </div>
+
+
+</div>
+
+
+
+
+<div class="table-responsive mt-5 p-3" >
+        
+<table id="table" class="table table-bordered">
+      <thead>
+        <tr>
+          <th><input type="checkbox" class="delall"></th>
+          <!--<th>Site</td>-->
+          <th>Item Group</td>
+          <th>Item</td>
+          <th>UOM</td>
+          <th>Brand</td>
+            <th>Description</td>
+          <th>Quantity</td>
+      <th>Price</th>
+      <th>Discount</th>
+      <!--<th>Tax</th>-->
+      <th>Total</th>
+      
+      </tr>
+      </thead>
+      <tbody id="demo">
+        
+        </tbody>
+</table>
+</div>      
+
+</div>
+
+
+
+
+  <div class="row"  style="padding: 30px 0px 0 0">
+        
+        
+        <div class="col-2">
+        <div align="center">
+            <button class="btn btn-danger deletee" type="button">- Del</button>
+            <button class="btn btn-success addmore" type="button">+ Add</button>
+        </div>
+        </div>
+ 
+ 
+    <div  class="col-3 pr-3  input-group">
+    
+
+           <div class="row border p-2">
+    <table  class="table">
+        <thead>
+            <th>
+               <input type="checkbox" class="delall_sub" id="main_check">
+            </th>
+            <th width="50%">
+                Terms
+            </th>
+            <th  width="50%">
+              Sub  Terms
+            </th>
+        </thead>
+        <tbody>
+                 <tr>
+                <td>  <input type="checkbox" class="delall_sub" name="cb_gst_print" id="cb_gst_print" value="1"> </td>
+                <td>GST </td>
+                <td>
+                    <select class=" select2 estab form-control" id="gst_print" name="gst_print">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_loading" id="cb_loading" value="1"> </td>
+                <td>LOADING</td>
+                <td>
+                    <select class=" select2 estab form-control" id="loading" name="loading">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_transport_charge" id="cb_transport_charge" value="1"> </td>
+                <td>TRANSPORT CHARGE </td>
+                <td>
+                    <select class=" select2 estab form-control" id="transport_charge" name="transport_charge">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_unloading" id="cb_unloading" value="1"> </td>
+                <td>UNLOADING </td>
+                <td>
+                    <select class=" select2 estab form-control" id="unloading" name="unloading">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+       
+        </tbody>
+    </table>
+   </div>
+
+</div>
+
+
+       <div class="modal" id="mymodal11">
+ <div class="modal-dialog" style="max-width:35%;height:100vh !important"  role="document">
+    <div class="modal-content"  width="330" >
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+    
+      <!-- Modal body -->
+      <div class="modal-body sent1" >
+
+
+         <div class="container ">
+             
+             <div class="row border">
+                 
+                 <div style="padding:10px 10px" class="col-8 border rounded-3">
+                     
+                     <h1 style="padding:20px 0px 30px 0px;font-size:40px">Purchase Order</h1>
+                    
+                     <div style="border-bottom:solid 3px hsl(342,55%,44%);padding:2px" class="d-flex justify-content-between">
+                          <h4 id="main_head_no">#<span></span></h4>
+                          <h4 id="main_head_date">02-02-2022</h4>
+                     </div>
+                     
+                     <div class="d-flex justify-content-between p-2 border-bottom">
+                         <div class=" border-right p-2">
+                             <h5>Total</h5>
+                            <p id="head_total">756.879</p>
+                         </div>
+                          <div class=" border-right p-2">
+                             <h5>Net</h5>
+                            <p id="head_net">756.879</p>
+                         </div>
+                          <div class=" border-right p-2">
+                             <h5>Due Date</h5>
+                            <p id="head_date">756.879</p>
+                         </div>
+                          <div class=" p-2">
+                             <h5>PO</h5>
+                            <p id="head_pol">756.879</p>
+                         </div>
+                     </div>
+                     <!--<hr class="bg-danger" style="padding:2px" >-->
+                     
+                 </div>
+                 
+              <div class="col-4 border pt-4 ">
+               <div>
+                     <h3 class="my_color" id="head_title">
+                           chennai silks
+                     </h3>
+                     <p style="border:none" id="head_address" readonly></p>
+               </div>
+               <div>
+                    <label  style="font-size:13px;" class="" name="">Supplier</label>
+                     <h6 class="" id="head_suplier">
+                           chennai silks
+                     </h6>
+                     
+               </div>
+                 </div>
+                 
+             </div>
+             
+              <div class="row border">
+                 
+        <div class="col border">
+                     
+                 </div>
+                 
+                 <div class="col border">
+                     
+                 </div>
+                 
+             </div>
+             
+              <div id="tt_max" class="mt-2">
+                 
+      <table id="sub_table_1" class="">
+        <!--<thead style=" color: white !important" class="my_bg ">-->
+        <!--  <tr style=" color: white !important;width:100% !important;">-->
+        <!--    <th style=" color: white !important" class="p-2">Site</th>-->
+        <!--    <th style=" color: white !important" class="p-2">ITEM</th>-->
+        <!--    <th style=" color: white !important" class="p-2">UOM</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Brand</th>-->
+        <!--    <th style=" color: white !important" class="p-2">QNT</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Price</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Discount</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Total</th>-->
+        <!--  </tr>-->
+        <!--</thead>-->
+        <tbody id="sub_table">
+
+        </tbody>
+      </table>
+           
+             </div>
+             
+         </div>
+
+  <div class=" d-flex justify-content-between">
+      
+      <div></div>
+      <div class="pt-2">
+         <div style="border-bottom:solid 2px ">
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label style="font-size:13px;" class="" name="">SUBTOTAL :</label>
+                  </div>
+                  <div class="ml-5">
+                       <label id="subtotal" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <hr>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label class="" name="">GST :</label>
+                  </div>
+                <div class="ml-5">
+                      <label id="gst" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label id="gst_type_1" class="" name="">SGST / CGST :</label>
+                  </div>
+                 <div class="ml-5">
+                       <label id="gst_value_1" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label class="" name="">TOTAL :</label>
+                  </div>
+           <div class="ml-5">
+                       <label id="bottom_total" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+         </div>
+         <div>
+                 <div class=" d-flex justify-content-between align-items-center mt-2">
+                  <div>
+                       <label class="" name="">AMOUNT :</label>
+                  </div>
+           <div class="ml-5">
+                       <label id="bottom_amount" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+         </div>
+      </div>
+      
+  </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+  <input  type="button" name="save_form"  id="save_form" value="purchesh order" class="btn btn-success" />
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+       <div class='col-4'>
+    
+          
+      <div class='input-group row'>
+
+           <div class="col-4">
+               
+                     <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Freight</div>
+							          <input type="number" class="form-control changesno_new" value=0  placeholder="Freight Charges" name="freight_charges" id="freight_charges">
+										
+                       </div>
+               
+
+          </div>
+           <div class="col-4">
+               
+                     <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Loading</div>
+							                 <input type="number" value=0  class="form-control changesno_new" placeholder="Loading Charges" name="loading_charges" id="loading_charges">
+                       </div>
+               
+
+          </div>
+               <div class="col-4">   
+                        <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Discount</div>
+							                 <input type="number" value=0  class="form-control changesno_new" placeholder="Discount" name="discount" id="discount">
+                       </div>
+
+            </div>  
+          
+          </div>
+          
+              <br>
+          
+      <div class='input-group row'>
+          <div class="col-4">
+          TAX TYPE 
+          </div>
+               <div class="col-8">   
+               <select class=" select2 estab form-control changesno_new" id="mtax_type" name="mtax_type">-->
+                <option   value='1'>Include  Tax</option>
+                <option   value='2' >Exclude Tax</option> 
+                </select>
+            </div>     
+         
+          
+          </div>
+          
+               <br>
+          
+      <div class='input-group row'>
+          <div class="col-4">
+          GST 
+          </div>
+               <div class="col-3">           <input type="number" min="0" max="100" class="form-control changesno_new " placeholder="%" name="gst1" value=100 id="gst1"> 
+            </div>     
+             <div class="col-5">     <input type="text" class="form-control changesno_new" placeholder=" GST VALUE" name="gst_value" id="gst_value"> 
+            </div> 
+          
+          </div>
+          
+         <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+        NON  GST 
+          </div>
+               <div class="col-3">           <input type="number" min="0" max="100" class="form-control changesno_new" placeholder="%" name="gst2" id="gst2"> 
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control changesno_new"   placeholder="NON GST VALUE"  name="non_gst_value" id="non_gst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+       SGST 
+          </div>
+               <div class="col-3">      
+               
+                        <select class="form-control changesno_new"  name="sgst1" id="sgst1">
+                            <option value="0">0%</option>
+                            <option value="2.5">2.5%</option>
+                            <option value="6">6%</option>
+                            <option value="9">9%</option>
+                            <option value="14">14%</option>
+                        </select>
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control "  placeholder="sgst amount"  name="sgst_value" id="sgst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+      CGST 
+          </div>
+               <div class="col-3">        
+                     
+                      <select class="form-control changesno_new"  name="cgst1" id="cgst1">
+                        <option value="0">0%</option>
+                        <option value="2.5">2.5%</option>
+                        <option value="6">6%</option>
+                        <option value="9">9%</option>
+                        <option value="14">14%</option>
+                    </select>
+            </div>     
+             <div class="col-5">         
+                   <input type="text" class="form-control changesno_cs_value"   placeholder="cgst amount"  name="cgst_value" id="cgst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+              
+    IGST 
+    
+          </div>
+               <div class="col-3">       
+                <select class="form-control changesno_new"  name="igst1" id="igst1">
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="12">12%</option>
+                    <option value="18">18%</option>
+                    <option value="28">28%</option>
+                </select>
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control changesno_cs_value"   placeholder="igst amount"  name="igst_value" id="igst_value"> 
+            </div> 
+          
+          </div>
+          
+    
+    
+    
+      
+      </div>
+      
+      <div align="right" class='col-2'>
+          
+                
+    
+   
+              
+              
+        <div   class="row">
+     
+         <div>
+              <input style="color:blue; font-size:30px;font-weight:bold;text-align:right;max-width:250px" class="form-control" name="totalaftertax"
+            id="totalAftertax" readonly placeholder="Total">
+         </div>
+          <input type="hidden" class="hid_input" id="o_total">
+          <input type="hidden" class="hid_input" name="totalpv" id="totalpv">
+        </div>
+    <br>
+          
+        <div class="row">
+             <input  type="button" name="prv_btn"  id="prv_btn" value="preview" class="btn btn-info" />
+        </div> 
+          
+          
+      </div>
+      
+      
+
+    
+      </div>
+
+  </form>
+  
+  
+  </div>
+
+
+
+<script>
+
+
+
+
+mkk1(<?php echo$_GET['move']; ?>);
+    
+     function mkk1(id){
+     
+
+     
+      $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_order_ajax.php",
+          dataType: "json",
+          data: {
+		    type : "3",
+		    id :id,
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      mk2(data);
+          }
+     
+ })
+
+ }
+ 
+
+
+
+
+ function mk2(data){
+     var i=0;
+
+var j=0;
+     
+  $("#demo").html("");
+ console.log(data);
+     console.log(data.length);
+   
+  for( i ; i < data.length; i++){
+       
+         console.log(i);
+       
+      temp=data[i];
+      
+         console.log(temp);
+         
+          $("#mid").val(temp.mid_t);
+          
+          $("#date").val(temp.date);
+         $("#request_date").val(temp.required_date);
+         $("#delivery_date").val(temp.delivery_date);
+         
+         $("#Supplier").val(temp.supplier);
+         $("#freight_charges").val(temp.freight_charges);
+         $("#loading_charges").val(temp.loading_charges);
+         $("#discount").val(temp.discount);
+         
+         $("#terms_payment").val(temp.payment_terms).change();
+         
+         $("#dispatch_through").val(temp.dispatch_through).change();
+         
+                  
+                           if(temp.mtax_type==1){
+                      
+                       $("#mtax_type").val('1').change();
+                      
+                  } else if(temp.mtax_type==2){
+                      
+                       $("#mtax_type").val('2').change();
+                      
+                  }
+                  
+
+         
+         $("#totalAftertax").val(temp.totalaftertax);
+         
+         $("#gst1").val(temp.gst1);
+         $("#gst2").val(temp.gst2);
+         $("#gst_value").val(temp.gst_value);
+         $("#non_gst_value").val(temp.non_gst_value);
+  
+if(temp.sgst1>0){
+    
+           
+         calculateTotal_new("sgst1")
+      
+    
+              $("#sgst1").val(temp.sgst1).change();
+         
+         $("#sgst_value").val(temp.sgst_value);
+  
+         
+}else if(temp.igst1>0){
+                     $("#igst1").val(temp.igst1).change();
+         
+         $("#igst_value").val(temp.igst_value);
+       }
+
+
+
+
+
+             if(temp.cb_gst_print==1){
+                 $("#cb_gst_print").prop('checked', true);
+                 
+                  if(temp.gst_print==1){
+                      
+                       $("#gst_print").val('1').change();
+                      
+                  } else if(temp.gst_print==2){
+                      
+                       $("#gst_print").val('2').change();
+                      
+                  }
+                 
+                 
+             }
+         
+             if(temp.cb_transport_charge==1){
+                 $("#cb_transport_charge").prop('checked', true);
+                 
+                  if(temp.transport_charge==1){
+                      
+                       $("#transport_charge").val('1').change();
+                      
+                  } else if(temp.transport_charge==2){
+                      
+                       $("#transport_charge").val('2').change();
+                      
+                  }
+                 
+             }
+             if(temp.cb_loading==1){
+                 $("#cb_loading").prop('checked', true);
+                 
+                  if(temp.loading==1){
+                      
+                       $("#loading").val('1').change();
+                      
+                  } else if(temp.loading==2){
+                      
+                       $("#loading").val('2').change();
+                      
+                  }
+                 
+             }
+             if(temp.cb_unloading==1){
+                 $("#cb_unloading").prop('checked', true);
+                 
+                  if(temp.unloading==1){
+                      
+                       $("#unloading").val('1').change();
+                      
+                  } else if(temp.unloading==2){
+                      
+                       $("#unloading").val('2').change();
+                      
+                  }
+                 
+             }
+         
+      
+         for( j=i ; j==i; j++){
+             
+             console.log(j);
+             
+             c=i+1;
+
+              
+              
+              
+                   $('#demo').append(' <tr><td><input type="checkbox" class="delone" ><label class="rowIndex">'+c+'</label></td><td hidden><input type="hidden" class="pid_check hid_input" name ="pid[]" id="pid_'+c+'"><input type="hidden" class="check_cat hid_input" name ="pcat[]" id="pcat_'+c+'"><input type="hidden" name ="pstock_type[]" class="hid_input" id="pstock_type_'+c+'"><input type="hidden" class="hid_input" name ="hsn[]" id="hsn_'+c+'"><input type="hidden" class="hid_input" name ="pv[]" id="pv_'+c+'"><input type="hidden" class="hid_input totalpv_calc" name ="tpv[]" id="tpv_'+c+'"><input type="text" class="form-control    product_auto" name ="pname[]" value="'+temp.site+'" id ="pname_'+c+'" ></td><td><input type="text" class="form-control    auto_itemgroup" value="'+temp.item_group+'"  name ="item_group[]" id ="item_group_'+c+'"></td><td><input type="text" class="form-control    auto_item" name ="item[]" id ="item_'+c+'"   value="'+temp.item+'"></td></td><td><input type="text"  value="'+temp.uom+'" class="form-control auto_uom  " name ="uom[]" id="uom_'+c+'"></td><td><input type="text" class="form-control auto_brand   changesno " autocomplete="off" value="'+temp.brand+'" name ="brand[]" onkeydown="onTestChange(event)" id ="brand_'+c+'"></td><td><input type="text" class="form-control   changesno " autocomplete="off" value="'+temp.description+'" name ="description[]" onkeydown="onTestChange(event)" id ="description_'+c+'"></td><td><input type="text" class="form-control   changesno " autocomplete="off"  value="'+temp.qty+'" name ="qty[]" onkeydown="onTestChange(event)" id ="qty_'+c+'"></td><td><input type="text" class="form-control   changesno " value="'+temp.price+'"  name ="price[]" id ="price_'+c+'"><input type="hidden" class="hid_input" id="cgst_'+c+'" name="cgst[]"><input type="hidden" class="hid_input" id="sgst_'+c+'" name="sgst[]"><input type="hidden" class="hid_input" id="igst_'+c+'" name="igst[]"><input type="hidden" class="hid_input" id="taxable_'+c+'" name="taxable[]"><input type="hidden" class="hid_input" id="fprice_'+c+'" name="fprice[]"><input type="hidden" class="hid_input" id="pprice_'+c+'" name="pprice[]"><input type="hidden" class="hid_input" id="tpprice_'+c+'" name="tpprice[]"><input type="hidden" class="hid_input totalmargin" id="margin_'+c+'" name="margin[]"><input type="hidden" class="hid_input" id="tmargin_'+c+'" name="tmargin[]"></td><td><div class="input-group"><select class="form-control col-sm-5 changesno " name="dis[]" id="dis_'+c+'" ><option value="1">%</option><option value="2">Rs</option><option value="3">FREE</option></select><input type="number" class="form-control col-sm-7 changesno " value="'+temp.dis_value+'"  name="disc[]" id="disc_'+c+'" step="any"></div></td><td hidden><div class="input-group"><select class="form-control col-sm-5 changesno "  name="tax_per[]" id="taxp_'+c+'" ><option value="0">0%</option><option value="5">5%</option><option value="12">12%</option> <option value="18">18%</option><option value="28">28%</option></select><input type="text" readonly  class="form-control col-sm-7 totalLineTax "  name="tax[]" id="tax_'+c+'" ></div></td><td><input type="text" value="'+temp.taxable+'" class="form-control   totalLinePrice "  name ="total[]" id ="total_'+c+'" ><input type="hidden" class="totalLinePprice" name ="ptotal[]" id ="ptotal_'+c+'"></td></tr>'); 
+                   
+                   
+                   
+                           $(`#dis_${c}`).val(temp.dis_type).change();
+                       calculateTotal();   
+                       
+                       if(temp.sgst1>0){
+                       calculateTotal_new("sgst1"); 
+                       }else   if(temp.igst1>0){
+                       calculateTotal_new("igst1");
+                           }
+                           
+                           
+                    
+                           
+         }
+       
+     
+       
+       
+  }  
+  
+  
+  
+  	             $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+  
+		    type : "772",
+		   value: $("#Supplier").val(),
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+              
+              		 
+		  	$("#supplier_address").val(data.address);
+		  	
+		  	let PRE =data.sname
+		  	
+		  	PRE="PO"+'-'+22+"-"+PRE+"-";
+		  	
+	
+		     
+		     
+		             $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+  
+		    type : "771",
+		   
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+              
+              let mk=0;
+              
+              if(data.id>0){
+                  
+                  mk=data.id
+ 
+              }else{
+                  mk=0;
+              }
+
+                        
+                        let value = parseInt(mk) + 1; 
+                        
+                          let kk = ''+value;
+                          let kkk = '';
+                          
+                        
+                              console.log(kk.length)
+                              
+                              if(kk.length==1){
+                                  kkk="000"
+                              }else if(kk.length==2){
+                                   kkk="00";
+                              
+                              }else if(kk.length==3){
+                                   kkk="0";
+                              
+                              }else if(kk.length==4){
+                                   kkk="";
+                              }
+                        
+                        value = kkk+value;
+                         
+                         PRE= PRE+value;
+
+                   	  	$("#po_no").val(PRE);
+
+          }
+        });
+		  
+
+
+          }
+        });
+  
+
+
+
+ }
+    
+    
+</script>
+
+<?php
+}
+elseif(isset($_GET['send']) && isset($_GET['q']))
+{
+ 
+  
+?>
+
+<?php
+}
+else
+{
+  ?>
+
+ <!----------- nav buttons --------------------->
+
+<div class="card-head">
+	
+	
+	<ul class="nav nav-tabs card-header-tabs">
+ <li class="nav-item">
+      
+    <a class="nav-item nav-link logo-default"  aria-selected="false">  Purchas Order-3065 </a>
+      </li>
+      <li class="nav-item">
+<a class="nav-item nav-link active" id="nav-pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="true"> Pending  <i class="fa fa-list"></i></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-item nav-link" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="false"> Add New <i class="fa fa-plus"></i> </a>
+      </li>
+            <li class="nav-item">
+<a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false"> View List  <i class="fa fa-list"></i></a>
+      </li>
+ <li class="nav-item">
+ <a class="nav-item nav-link" id="nav-fil-tab" data-toggle="tab" href="#nav-fil" role="tab" aria-controls="nav-fil" aria-selected="false">Filter List <i class="fa fa-filter"></i></a>
+      </li>
+      
+    <!----------- header cards --------------------->
+      
+
+    </ul>
+  
+ 
+  
+</div>
+
+
+
+
+
+<div class="card-body ">
+<div class="tab-content" id="nav-tabContent">
+    
+    
+    
+    
+    
+    
+  <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab">
+
+
+ <table id="table" 
+  class="table table-bordered dataTables_scroll"
+  data-toolbar="#toolbar"
+  data-search="true" 
+  data-show-refresh="true"
+  data-show-toggle="true" 
+  data-show-columns="true"
+  data-show-export="true"
+  data-filter-control="true" 
+  data-export-options="{'fileName': 'testo'}" 
+  data-minimum-count-columns="2"
+  data-side-pagination="server" 
+  data-pagination="true" 
+  data-id-field="id"
+  data-buttons="[ 'copy', 'excel', 'pdf', 'colvis' ]" 
+  data-page-list="[10, 25, 50, 100, ALL]" 
+  data-show-footer="false">
+ 
+  <thead>
+    <tr>
+        
+      <th >ID</th>
+      <th >Date</th>
+      <th >Site</th>
+      <th >Reason</th>
+      <th >Remarks</th>
+      <th >Action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <?php 
+    
+      $data = $db1->sql("select * from sm_main_form_3061 where  status=3 order by id asc limit 10")->many();
+         $data2 = $db1->sql("select * from sm_main_form_3064 where status=1 ")->many();
+      
+      if(!empty($data) ||  !empty($data2)){
+          
+          
+          
+          
+          
+    foreach($data as $row){?>
+    
+       <tr>
+        
+           <td><?php echo $row['id']; ?></td>
+          <td><?php 
+           
+            $originalDate = $row["date"];
+      echo   $newDate = date("d-m-Y", strtotime($originalDate)); 
+           
+           ?></td>
+           <td><?php echo $row['site'] ?></td>
+           <td><?php echo $row["reason"]; ?></td>
+           <td><?php echo $row["remarks"]; ?></td>
+           
+           <?php if($row['status']==3){ ?>
+          <td>
+             <a class="btn bg-success" href="purchase_order?approve_move=<?php echo $row['id']; ?>">PO</a>
+          </td>
+           <?php }else if($row['status']==2){ ?>
+           <?php } ?>
+           </tr>
+         <?php }    
+         
+             foreach($data2 as $row){?>
+         
+                <tr>
+        
+           <td><?php echo $row['id']; ?></td>
+ 
+               <td><?php
+           
+           
+            
+             $data1 = $db1->sql("select supplier from sm_main_form_3063  where  id='". $row['supplier'] ."'")->one();
+            
+            echo $data1['supplier'];
+            
+            ?></td>
+           <td><?php echo $row["reason"]; ?></td>
+           <td></td>
+           <td></td>
+           <?php if($row['status']==1){ ?>
+          <td>
+            <a class="btn bg-success" href="purchase_order?move=<?php echo $row['supplier']; ?>&id=<?php echo $row['id']; ?>">PO</a>
+          </td>
+           <?php }else if($row['status']==2){ ?>
+           <?php } ?>
+           </tr>
+         <?php } 
+         
+         }else{ ?>
+         
+         <tr>
+             <td>
+                 No matching records found
+             </td>
+         </tr>
+         
+         <?php } ?>
+  </tbody>
+</table>
+
+
+
+    
+          </div> 
+    
+    
+
+    <!----------- view list  page ---------------------> 
+    
+   <div class="tab-pane fade show " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      
+  <table id="tablemain" 
+  data-url="../api/ajax/cms_table_data_ajax.php?fid=3065&type=1&search_name=supplier"
+  class="table table-bordered dataTables_scroll"
+  data-toolbar="#toolbar"
+  data-search="true" 
+  data-show-refresh="true"
+  data-show-toggle="true" 
+  data-show-columns="true"
+  data-show-export="true"
+  data-filter-control="true" 
+  data-export-options="{'fileName': 'testo'}" 
+  data-minimum-count-columns="2"
+  data-side-pagination="server" 
+  data-pagination="true" 
+  data-id-field="id"
+  data-buttons="[ 'copy', 'excel', 'pdf', 'colvis' ]" 
+  data-page-list="[10, 25, 50, 100, ALL]" 
+  data-show-footer="false">
+  <thead>
+    <tr>
+
+      <th data-field="idd">ID</th>
+    
+       <th data-field=supplier>supplier</th>
+       
+
+  <th data-field="terms_payment">terms_payment</th>
+
+  <th data-field="Reference">Reference</th>
+
+
+  <th data-field="delivery_address">delivery_address</th>
+
+  <th data-field="required_date">required_date</th>
+
+   <th data-field="date">Date</th>
+   <th data-field="totalaftertax">total</th>
+
+  
+
+      <th class="action" data-field="action" data-formatter=actionFormatter_3065 data-events="actionEvents">Action</th>
+    </tr>
+  </thead>
+</table>
+<!--<th class="action"  data-field="action" data-formatter=actionFormatter1 data-events="actionEvents">ACTION</th>-->
+
+</div>
+
+  <div class="modal fade" id="modal1" role="dialog">
+    <div class="modal-dialog modal-xl">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">PURCHASE ORDER</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+     <div class="modal-body">
+         
+        </div>
+        <div class="modal-footer">
+            <!--<button type="button" class="btn btn-secondary" onclick="myfunction2()" data-dismiss="modal">Ok</button>-->
+			<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+									
+			</div>
+        <!--<div class="modal-footer">-->
+        <!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <!--</div>-->
+      </div>
+      
+    </div>
+  </div>
+
+<script>
+
+    function actionFormatter_3065(value, row, index) {
+
+             return [
+        
+ `<button type="button" class="btn btn-info btn-xs "   title="PO" onclick="myFun(${row.id})"><i class="fa fa-print"></i></button><button type="button" class="btn bg-gray-800 text-light btn-xs  " title="internal PO" onclick="myFun1(${row.id})"><i class="fa fa-print"></i></button><button type="button" class="btn btn-primary fedit"><i class="fa fa-pen"></i></button><button type="button" class="btn btn-danger btn-xs  " onclick="remove1(${row.id})"><i class="fas fa-times"></i></button>`,	
+	
+    ].join('');
+
+
+}
+
+
+function myFun(id){
+//  alert(id);
+    $('#modal1').modal();
+            $("#modal1 .modal-body").html('<iframe width="100%" height="700" src="../api/print/purchase_order_print.php?cid=<?php echo $cid; ?>&id='+id+'"></iframe>');
+    
+    
+    // alert(id)
+
+}
+
+function myFun1(id){
+//  alert(id);
+    $('#modal1').modal();
+            $("#modal1 .modal-body").html('<iframe width="100%" height="700" src="../api/print/purchase_order_print_2.php?cid=<?php echo $cid; ?>&id='+id+'"></iframe>');
+    
+    
+    // alert(id)
+
+}
+
+</script>
+  
+  
+  
+      <!----------- calculation page --------------------->
+  
+  
+<div class="tab-pane fade  " id="nav-add" role="tabpanel" aria-labelledby="nav-profile-tab"> 
+
+<form  method="post"  id="purchesh_order">
+    
+      <input type="hidden" id="cid" name="cid" value="28754745">
+     <input type="hidden" id="uid" name="uid" value="">
+     <input type="hidden" id="add_new" name="save" value="1">
+     <input type="hidden" id="mcat_id" value="0">
+
+    
+ 
+<div class="form-row">
+<div class="col">
+      
+ 
+
+    <!-------------------------2--------------------------------->
+
+     <div class="row">
+      
+      
+      <div class="col">
+          
+        <div class="row m-1">
+           
+              <label class="" name="Item_Group">Date</label>
+              <input class="form-control entab date form_date" required name="date" id="date"  value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" > 
+           
+        </div>
+
+        
+        <div class="row m-1">
+           
+              <label class=" form-label">PO No</label>
+        <input type="text" class="form-control  entab " value="<?php echo $approve_move_id; ?>" readonly name="po_no"
+          id="po_no">
+        <input type="hidden" class="form-control  entab " value="<?php echo $data1['id']; ?>" name="mid" id="mid">
+           
+        </div>
+        
+         <div class="row m-1">
+               <label class=" form-label">Supplier</label>
+            <input type="text" class="form-control  entab  " name="Supplier" id="Supplier">
+        </div>
+        <div class="row m-1">
+            <label class=" form-label">Supplier Address</label>
+      
+        <textarea class="form-control  entab  " name="supplier_address" id="supplier_address">
+             </textarea>
+        </div>
+        
+          
+      </div>
+      
+           <div class="col">
+          
+        <div class="row m-1">
+            <label class=" form-label">Site (Delivery To)</label>
+            <input type="text" class="form-control  entab  " name="site_del_to" id="site_del_to">
+        </div>
+        <div class="row m-1">
+             <label class=" form-label">delivery Address</label>
+             <textarea class="form-control  entab  " name="delivery_address" id="delivery_address">
+             </textarea>
+       
+        </div>
+   
+        
+            <div class="row m-1">
+           
+            <label class=" form-label">Reference</label>
+        <input type="text" class="form-control  entab  " name="Reference" id="Reference">
+        
+        </div>
+                
+        <div class="row m-1">
+            
+            <label class=" form-label">Request Date</label>
+        <input class="form-control entab date form_date" required name="request_date" id="request_date"
+          value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" >
+          
+        </div>
+        
+          
+      </div>
+      
+      
+      <div class="col">
+          
+        <div class="row m-1">
+            <label class=" form-label">Terms of Payment</label>
+           
+            <select class="select2 form-control"  id="terms_payment" name="terms_payment">
+
+<option value='0'>Select</option>
+
+<?php 
+ 
+         $machine = $db1->from('sm_main_form_3008')->where('del #',null)->many();
+  
+         foreach($machine as $p){
+?>
+
+ <option value="<?php echo $p['terms']; ?>">
+  <?php echo $p['terms']; ?>
+ </option>
+<?php } ?>
+</select>
+             
+        </div>
+        <div class="row m-1">
+                                       <label class=" form-label">Dispatch Through</label>
+                         <select class="select2 form-control"  id="dispatch_through" name="dispatch_through">
+
+<option value='0'>Select</option>
+
+<?php 
+ 
+         $machine = $db1->from('sm_main_form_3007')->where('del #',null)->many();
+  
+         foreach($machine as $p){
+?>
+
+ <option value="<?php echo $p['name']; ?>">
+  <?php echo $p['name']; ?>
+ </option>
+<?php } ?>
+</select>
+        </div>
+        <div class="row m-1">
+          
+        <label class=" form-label">Vehicle Type</label>
+        <select class=" select2 estab form-control " id="vehicle_delivery" name="vehicle_delivery">
+          <option value='1'>own pick up</option>
+          <option value='2' selected='selected'> party delivery</option>
+        </select>
+        </div>
+        <div class="row m-1">
+           
+             <label class=" form-label">delivery Date</label>
+        <input class="form-control entab date form_date" required name="delivery_date" id="delivery_date"
+          value=" <?php $originalDate =date(" Y/m/d") ; echo date("d-m-Y", strtotime($originalDate));?>" >
+           
+        </div>
+        
+          
+      </div>
+      
+
+      
+                
+  </div>
+
+</div>
+
+
+
+
+<div class="table-responsive mt-5 p-3" >
+        
+<table id="table" class="table table-bordered">
+      <thead>
+        <tr>
+          <th><input type="checkbox" class="delall"></th>
+          <!--<th>Site</td>-->
+          <th>Item Group</td>
+          <th>Item</td>
+          <th>UOM</td>
+          <th>Brand</td>
+            <th>Description</td>
+          <th>Quantity</td>
+      <th>Price</th>
+      <th>Discount</th>
+      <!--<th>Tax</th>-->
+      <th>Total</th>
+      
+      </tr>
+      </thead>
+      <tbody id="demo">
+        
+        </tbody>
+</table>
+</div>      
+
+</div>
+
+
+  <div class="row"  style="padding: 30px 0px 0 0">
+        
+        
+        <div class="col-2">
+        <div align="center">
+            <button class="btn btn-danger deletee" type="button">- Del</button>
+            <button class="btn btn-success addmore" type="button">+ Add</button>
+        </div>
+        </div>
+ 
+ 
+    <div  class="col-3 pr-3  input-group">
+    
+
+           <div class="row border p-2">
+    <table  class="table">
+        <thead>
+            <th>
+               <input type="checkbox" class="delall_sub" id="main_check">
+            </th>
+            <th width="50%">
+                Terms
+            </th>
+            <th  width="50%">
+              Sub  Terms
+            </th>
+        </thead>
+        <tbody>
+                 <tr>
+                <td>  <input type="checkbox" class="delall_sub" name="cb_gst_print" id="cb_gst_print" value="1"> </td>
+                <td>GST </td>
+                <td>
+                    <select class=" select2 estab form-control" id="gst_print" name="gst_print">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_loading" id="cb_loading" value="1"> </td>
+                <td>LOADING</td>
+                <td>
+                    <select class=" select2 estab form-control" id="loading" name="loading">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_transport_charge" id="cb_transport_charge" value="1"> </td>
+                <td>TRANSPORT CHARGE </td>
+                <td>
+                    <select class=" select2 estab form-control" id="transport_charge" name="transport_charge">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>  <input type="checkbox" class="delall_sub"  name="cb_unloading" id="cb_unloading" value="1"> </td>
+                <td>UNLOADING </td>
+                <td>
+                    <select class=" select2 estab form-control" id="unloading" name="unloading">
+                        <option   value='1'>inclusive</option>
+                        <option   value='2' selected='selected' > exclusive</option>
+                    </select>   
+                    
+                </td>
+            </tr>
+       
+        </tbody>
+    </table>
+   </div>
+
+</div>
+
+
+       <div class="modal" id="mymodal11">
+ <div class="modal-dialog" style="max-width:35%;height:100vh !important"  role="document">
+    <div class="modal-content"  width="330" >
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+    
+      <!-- Modal body -->
+      <div class="modal-body sent1" >
+
+
+         <div class="container ">
+             
+             <div class="row border">
+                 
+                 <div style="padding:10px 10px" class="col-8 border rounded-3">
+                     
+                     <h1 style="padding:20px 0px 30px 0px;font-size:40px">Purchase Order</h1>
+                    
+                     <div style="border-bottom:solid 3px hsl(342,55%,44%);padding:2px" class="d-flex justify-content-between">
+                          <h4 id="main_head_no">#<span></span></h4>
+                          <h4 id="main_head_date">02-02-2022</h4>
+                     </div>
+                     
+                     <div class="d-flex justify-content-between p-2 border-bottom">
+                         <div class=" border-right p-2">
+                             <h5>Total</h5>
+                            <p id="head_total">756.879</p>
+                         </div>
+                          <div class=" border-right p-2">
+                             <h5>Net</h5>
+                            <p id="head_net">756.879</p>
+                         </div>
+                          <div class=" border-right p-2">
+                             <h5>Due Date</h5>
+                            <p id="head_date">756.879</p>
+                         </div>
+                          <div class=" p-2">
+                             <h5>PO</h5>
+                            <p id="head_pol">756.879</p>
+                         </div>
+                     </div>
+                     <!--<hr class="bg-danger" style="padding:2px" >-->
+                     
+                 </div>
+                 
+              <div class="col-4 border pt-4 ">
+               <div>
+                     <h3 class="my_color" id="head_title">
+                           chennai silks
+                     </h3>
+                     <p style="border:none" id="head_address" readonly></p>
+               </div>
+               <div>
+                    <label  style="font-size:13px;" class="" name="">Supplier</label>
+                     <h6 class="" id="head_suplier">
+                           chennai silks
+                     </h6>
+                     
+               </div>
+                 </div>
+                 
+             </div>
+             
+              <div class="row border">
+                 
+        <div class="col border">
+                     
+                 </div>
+                 
+                 <div class="col border">
+                     
+                 </div>
+                 
+             </div>
+             
+              <div id="tt_max" class="mt-2">
+                 
+      <table id="sub_table_1" class="">
+        <!--<thead style=" color: white !important" class="my_bg ">-->
+        <!--  <tr style=" color: white !important;width:100% !important;">-->
+        <!--    <th style=" color: white !important" class="p-2">Site</th>-->
+        <!--    <th style=" color: white !important" class="p-2">ITEM</th>-->
+        <!--    <th style=" color: white !important" class="p-2">UOM</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Brand</th>-->
+        <!--    <th style=" color: white !important" class="p-2">QNT</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Price</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Discount</th>-->
+        <!--    <th style=" color: white !important" class="p-2">Total</th>-->
+        <!--  </tr>-->
+        <!--</thead>-->
+        <tbody id="sub_table">
+
+        </tbody>
+      </table>
+           
+             </div>
+             
+         </div>
+
+  <div class=" d-flex justify-content-between">
+      
+      <div></div>
+      <div class="pt-2">
+         <div style="border-bottom:solid 2px ">
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label style="font-size:13px;" class="" name="">SUBTOTAL :</label>
+                  </div>
+                  <div class="ml-5">
+                       <label id="subtotal" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <hr>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label class="" name="">GST :</label>
+                  </div>
+                <div class="ml-5">
+                      <label id="gst" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label id="gst_type_1" class="" name="">SGST / CGST :</label>
+                  </div>
+                 <div class="ml-5">
+                       <label id="gst_value_1" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                  <div>
+                       <label class="" name="">TOTAL :</label>
+                  </div>
+           <div class="ml-5">
+                       <label id="bottom_total" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+         </div>
+         <div>
+                 <div class=" d-flex justify-content-between align-items-center mt-2">
+                  <div>
+                       <label class="" name="">AMOUNT :</label>
+                  </div>
+           <div class="ml-5">
+                       <label id="bottom_amount" style="font-size:13px;" class="" name="">2687</label>
+                  </div>
+              </div>
+         </div>
+      </div>
+      
+  </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+  <input  type="button" name="save_form"  id="save_form" value="purchesh order" class="btn btn-success" />
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+       <div class='col-4'>
+    
+          
+      <div class='input-group row'>
+
+           <div class="col-4">
+               
+                     <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Freight</div>
+							          <input type="number" class="form-control changesno_new" value=0  placeholder="Freight Charges" name="freight_charges" id="freight_charges">
+										
+                       </div>
+               
+
+          </div>
+               <div class="col-4">   
+                        <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Loading</div>
+							                 <input type="number" value=0  class="form-control changesno_new" placeholder="Loading Charges" name="loading_charges" id="loading_charges">
+                       </div>
+
+            </div>  
+                         <div class="col-4">   
+                        <div class="input-group">                   
+						   <div class="input-group-text col-sm-6">Discount</div>
+							                 <input type="number" value=0  class="form-control changesno_new" placeholder="Discount" name="discount" id="discount">
+                       </div>
+
+            </div>
+          </div>
+          
+              <br>
+          
+      <div class='input-group row'>
+          <div class="col-4">
+          TAX TYPE 
+          </div>
+               <div class="col-8">   
+               <select class=" select2 estab form-control changesno_new" id="mtax_type" name="mtax_type">-->
+                <option   value='1'>Include  Tax</option>
+                <option   value='2' >Exclude Tax</option> 
+                </select>
+            </div>     
+         
+          
+          </div>
+          
+               <br>
+          
+      <div class='input-group row'>
+          <div class="col-4">
+          GST 
+          </div>
+               <div class="col-3">           <input type="number" min="0" max="100" class="form-control changesno_new " placeholder="%" name="gst1" value=100 id="gst1"> 
+            </div>     
+             <div class="col-5">     <input type="text" class="form-control changesno_new" placeholder=" GST VALUE" name="gst_value" id="gst_value"> 
+            </div> 
+          
+          </div>
+          
+         <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+        NON  GST 
+          </div>
+               <div class="col-3">           <input type="number" min="0" max="100" class="form-control changesno_new" placeholder="%" name="gst2" id="gst2"> 
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control changesno_new"   placeholder="NON GST VALUE"  name="non_gst_value" id="non_gst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+       SGST 
+          </div>
+               <div class="col-3">      
+               
+                        <select class="form-control changesno_new"  name="sgst1" id="sgst1">
+                            <option value="0">0%</option>
+                            <option value="2.5">2.5%</option>
+                            <option value="6">6%</option>
+                            <option value="9">9%</option>
+                            <option value="14">14%</option>
+                        </select>
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control "  placeholder="sgst amount"  name="sgst_value" id="sgst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+      CGST 
+          </div>
+               <div class="col-3">        
+                     
+                      <select class="form-control changesno_new"  name="cgst1" id="cgst1">
+                        <option value="0">0%</option>
+                        <option value="2.5">2.5%</option>
+                        <option value="6">6%</option>
+                        <option value="9">9%</option>
+                        <option value="14">14%</option>
+                    </select>
+            </div>     
+             <div class="col-5">         
+                   <input type="text" class="form-control changesno_cs_value"   placeholder="cgst amount"  name="cgst_value" id="cgst_value"> 
+            </div> 
+          
+          </div>
+          
+               <br>
+          
+          <div class='input-group row'>
+          <div class="col-4">
+              
+    IGST 
+    
+          </div>
+               <div class="col-3">       
+                <select class="form-control changesno_new"  name="igst1" id="igst1">
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="12">12%</option>
+                    <option value="18">18%</option>
+                    <option value="28">28%</option>
+                </select>
+            </div>     
+             <div class="col-5">           <input type="text" class="form-control changesno_cs_value"   placeholder="igst amount"  name="igst_value" id="igst_value"> 
+            </div> 
+          
+          </div>
+          
+    
+    
+    
+      
+      </div>
+      
+      <div align="right" class='col-2'>
+          
+                
+    
+   
+              
+              
+        <div   class="row">
+     
+         <div>
+              <input style="color:blue; font-size:30px;font-weight:bold;text-align:right;max-width:250px" class="form-control" name="totalaftertax"
+            id="totalAftertax" readonly placeholder="Total">
+         </div>
+          <input type="hidden" class="hid_input" id="o_total">
+          <input type="hidden" class="hid_input" name="totalpv" id="totalpv">
+        </div>
+    <br>
+          
+        <div class="row">
+             <input  type="button" name="prv_btn"  id="prv_btn" value="preview" class="btn btn-info" />
+        </div> 
+          
+          
+      </div>
+      
+      
+
+    
+      </div>
+
+
+
+</form>
+
+</div>
+<?php
+}
+
+?>
+
+
+
+
+
+</div></div>
+
+
+
+
+<script>
+
+            
+
+
+   $('#main_check').click(function (){
+             
+             if( !$('#main_check').prop("checked")){
+                    $('.delall_sub').prop("checked", false);
+             }else{
+                  $('.delall_sub').prop("checked", true);
+             }
+              
+         })
+
+ 
+ 
+ <?php if($approve_move_id!=""){ ?>
+
+       mkk(<?php echo $approve_move_id; ?>);
+ <?php } ?>
+ 
+ function mkk(id){
+     
+    //  alert(id);
+     
+      $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_order_ajax.php",
+          dataType: "json",
+          data: {
+		    type : "2",
+		    id :id,
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      mk(data);
+          }
+     
+ })
+
+ }
+ 
+
+
+var i=0;
+
+var j=0;
+
+var c=0;
+
+ function mk(data){
+     
+     
+     console.log("called mk esit")
+
+  $("#demo").html("");
+ console.log(data);
+     console.log(data.length);
+   
+  for( i ; i < data.length; i++){
+       
+         console.log(i);
+       
+      temp=data[i];
+      
+         console.log(temp);
+      
+         for( j=i ; j==i; j++){
+             
+             console.log(j);
+             
+            c=i+1;
+
+              
+              
+                   $('#demo').append(' <tr><td><input type="checkbox" class="delone" ><label class="rowIndex">'+c+'</label></td><td hidden><input type="hidden" class="pid_check hid_input" name ="pid[]" id="pid_'+c+'"><input type="hidden" class="check_cat hid_input" name ="pcat[]" id="pcat_'+c+'"><input type="hidden" name ="pstock_type[]" class="hid_input" id="pstock_type_'+c+'"><input type="hidden" class="hid_input" name ="hsn[]" id="hsn_'+c+'"><input type="hidden" class="hid_input" name ="pv[]" id="pv_'+c+'"><input type="hidden" class="hid_input totalpv_calc" name ="tpv[]" id="tpv_'+c+'"><input type="text" class="form-control   entab product_auto" name ="pname[]" value="'+temp.site+'" id ="pname_'+c+'" ></td><td><input type="text" class="form-control   entab auto_itemgroup"  value="'+temp.item_group+'" name ="item_group[]" id ="item_group_'+c+'"></td><td><input type="text" class="form-control   entab auto_item" name ="item[]" id ="item_'+c+'"   value="'+temp.item+'"></td></td><td><input type="text"  value="'+temp.uom+'" class="form-control auto_uom  entab" name ="uom[]" id="uom_'+c+'"></td><td><input type="text" class="form-control auto_brand  entab changesno " autocomplete="off"  name ="brand[]" onkeydown="onTestChange(event)" id ="brand_'+c+'"></td><td><input type="text" class="form-control  entab changesno " autocomplete="off"  name ="description[]" onkeydown="onTestChange(event)" id ="description_'+c+'"></td><td><input type="text" class="form-control  entab changesno " autocomplete="off"  value="'+temp.qty+'" name ="qty[]" onkeydown="onTestChange(event)" id ="qty_'+c+'"></td><td><input type="text" class="form-control  entab changesno "  name ="price[]" id ="price_'+c+'"><input type="hidden" class="hid_input" id="cgst_'+c+'" name="cgst[]"><input type="hidden" class="hid_input" id="sgst_'+c+'" name="sgst[]"><input type="hidden" class="hid_input" id="igst_'+c+'" name="igst[]"><input type="hidden" class="hid_input" id="taxable_'+c+'" name="taxable[]"><input type="hidden" class="hid_input" id="fprice_'+c+'" name="fprice[]"><input type="hidden" class="hid_input" id="pprice_'+c+'" name="pprice[]"><input type="hidden" class="hid_input" id="tpprice_'+c+'" name="tpprice[]"><input type="hidden" class="hid_input totalmargin" id="margin_'+c+'" name="margin[]"><input type="hidden" class="hid_input" id="tmargin_'+c+'" name="tmargin[]"></td><td><div class="input-group"><select class="form-control col-sm-5 changesno " name="dis[]" id="dis_'+c+'" ><option value="1">%</option><option value="2">Rs</option><option value="3">FREE</option></select><input type="number" class="form-control col-sm-7 changesno "  name="disc[]" id="disc_'+c+'" step="any"></div></td><td hidden><div class="input-group"><select class="form-control col-sm-5 changesno "  name="tax_per[]" id="taxp_'+c+'" ><option value="0">0%</option><option value="5">5%</option><option value="12">12%</option> <option value="18">18%</option><option value="28">28%</option></select><input type="text" readonly  class="form-control col-sm-7 totalLineTax "  name="tax[]" id="tax_'+c+'" ></div></td><td><input type="text" class="form-control  entab totalLinePrice "  name ="total[]" id ="total_'+c+'" ><input type="hidden" class="totalLinePprice" name ="ptotal[]" id ="ptotal_'+c+'"></td></tr>'); 
+
+         }
+       
+     
+       
+       
+  }  
+
+
+
+// alert(c);
+
+ }
+
+    
+
+//-----------------------------------------------------------------
+
+
+
+
+
+
+  
+ $('.addmore').click(function(){
+      var rowCount = $('#demo tr').length;
+  
+      
+   var i=rowCount +1;
+    anline(i);
+ });
+  
+       
+ 
+ function anline(i)
+  {
+console.log("called mk esit")
+   
+       $('#demo').append(' <tr><td><input type="checkbox" class="delone" ><label class="rowIndex">'+i+'</label></td><td hidden><input type="hidden" class="pid_check hid_input" name ="pid[]" id="pid_'+i+'"><input type="hidden" class="check_cat hid_input" name ="pcat[]" id="pcat_'+i+'"><input type="hidden" name ="pstock_type[]" class="hid_input" id="pstock_type_'+i+'"><input type="hidden" class="hid_input" name ="hsn[]" id="hsn_'+i+'"><input type="hidden" class="hid_input" name ="pv[]" id="pv_'+i+'"><input type="hidden" class="hid_input totalpv_calc" name ="tpv[]" id="tpv_'+i+'"><input type="text" class="form-control   entab product_auto" name ="pname[]" id ="pname_'+i+'"></td><td><input type="text" class="form-control   entab auto_itemgroup" name ="item_group[]"  id ="item_group_'+i+'"></td><td><input type="text" class="form-control   entab auto_item" name ="item[]" id ="item_'+i+'"></td><td><input type="text" class="form-control auto_uom entab" name ="uom[]" id="uom_'+i+'"></td><td><input type="text" class="form-control auto_brand  entab changesno " autocomplete="off"  name ="brand[]" onkeydown="onTestChange(event)" id ="brand_'+i+'"></td> <td><input type="text" class="form-control  entab changesno " autocomplete="off"  name ="description[]" onkeydown="onTestChange(event)" id ="description_'+i+'"><td><input type="text" class="form-control  entab changesno " autocomplete="off"  name ="qty[]" onkeydown="onTestChange(event)" id ="qty_'+i+'"></td></td><td><input type="text" class="form-control  entab changesno "  name ="price[]" id ="price_'+i+'"><input type="hidden" class="hid_input" id="cgst_'+i+'" name="cgst[]"><input type="hidden" class="hid_input" id="sgst_'+i+'" name="sgst[]"><input type="hidden" class="hid_input" id="igst_'+i+'" name="igst[]"><input type="hidden" class="hid_input" id="taxable_'+i+'" name="taxable[]"><input type="hidden" class="hid_input" id="fprice_'+i+'" name="fprice[]"><input type="hidden" class="hid_input" id="pprice_'+i+'" name="pprice[]"><input type="hidden" class="hid_input" id="tpprice_'+i+'" name="tpprice[]"><input type="hidden" class="hid_input totalmargin" id="margin_'+i+'" name="margin[]"><input type="hidden" class="hid_input" id="tmargin_'+i+'" name="tmargin[]"></td><td><div class="input-group"><select class="form-control col-sm-5 changesno " name="dis[]" id="dis_'+i+'" ><option value="1">%</option><option value="2">Rs</option><option value="3">FREE</option></select><input type="number" class="form-control col-sm-7 changesno "  name="disc[]" id="disc_'+i+'" step="any"></div></td ><td hidden><div class="input-group"><select class="form-control col-sm-5 changesno "  name="tax_per[]" id="taxp_'+i+'" ><option value="0">0%</option><option value="5">5%</option><option value="12">12%</option> <option value="18">18%</option><option value="28">28%</option></select><input type="text" readonly  class="form-control col-sm-7 totalLineTax "  name="tax[]" id="tax_'+i+'" ></div></td><td><input type="text" class="form-control  entab totalLinePrice "  name ="total[]" id ="total_'+i+'" ><input type="hidden" class="totalLinePprice" name ="ptotal[]" id ="ptotal_'+i+'"></td></tr>'); 
+   $('#pname_'+i).focus();
+    i++;
+
+
+
+
+  rowindex_change();
+        initiate_functions();
+
+ } 
+ 
+ $(document).on('change','.delall',function(){
+ $('input[class=delone]:checkbox').prop("checked", $(this).is(':checked'));
+ });
+ $(".deletee").on('click', function() {
+ $('.delone:checkbox:checked').parents("tr").remove();
+ $('.delall').prop("checked", false); 
+
+ rowindex_change();
+
+ });
+
+ function rowindex_change()
+ {
+ var j=1;
+            $('.rowIndex').each(function() {
+              $(this).html(j);j++;
+            });         
+ }
+
+ function onTestChange(event) {
+ 
+            if(event.keyCode == 13) {
+           
+           //   anline();
+              return false;
+            }    
+ }  
+
+
+
+
+var calcObject = {
+       amountNull : '0.00',
+       amountTax : '0.00',
+       amountTotal : '0.00',
+   };
+   $(document).on('keyup change select blur click','.changesno',function(){
+       
+   
+       id_arr = $(this).attr('id');
+       id1 = id_arr.split("_");
+       id = id1[1];
+     gst_calc(id)
+
+     });
+     
+     
+
+   function gst_calc(id)
+     {
+             
+       distype = $('#dis_'+id).val();
+           
+       var tax = $('#taxp_'+id).val();
+       var pos = $('#mtax').val();
+       var included = $('#mtax_type').val();
+       
+           var taxtype =included;
+      
+
+       
+        var input_id='#qty_'+id; 
+       $(input_id).val($(input_id).val());
+       
+       // console.log('#qty_'+id+' v '+$('#qty_'+id).val()+'nn'+input_id);
+       if( $('#qty_'+id).val().length === 0 ) {quantity = 0;}else{quantity = $('#qty_'+id).val()}
+       if( $('#price_'+id).val().length === 0 ) {price = 0;}else{price = $('#price_'+id).val()}
+       if( $('#pprice_'+id).val().length === 0 ) {purchase_price = 0;}else{purchase_price = $('#pprice_'+id).val()}
+       if( $('#disc_'+id).val().length === 0 ) {dis = 0;}else{dis = $('#disc_'+id).val()}
+       if( $('#pv_'+id).val().length === 0 ) {pv = 0;}else{pv = $('#pv_'+id).val()}
+
+       var tpv = parseFloat(quantity)*parseFloat(pv);
+       $('#tpv_'+id).val(tpv.toFixed(2));
+       var purchase_total = purchase_price*quantity;
+       $('#ptotal_'+id).val(purchase_total.toFixed(2));
+
+
+       if (distype == '1'){
+           discount =(parseFloat(price)* parseFloat(dis) / 100)
+           dprice = parseFloat(price) - discount }
+       if (distype == '2'){
+           
+            console.log(dis,"-",price)
+           
+           discount =parseFloat(dis)
+           dprice = parseFloat(price)- discount }
+            
+           //  console.log(dprice)
+            
+          var temp=dprice*quantity;
+
+          
+       var Ttax =0;
+       var amount =temp;
+
+       Ttax = (dprice * parseFloat(quantity)) * tax /100;
+       if ( tax == "NULL" ){ 
+       if (taxtype == '1'){amount =  parseFloat(dprice) * parseFloat(quantity)}
+       if (taxtype == '2'){amount =  parseFloat(dprice) * parseFloat(quantity)}}
+       else
+       {
+       if (taxtype == '1'){amount =  parseFloat(dprice) * parseFloat(quantity)}
+       if (taxtype == '2'){amount =  parseFloat(dprice) * parseFloat(quantity) +  parseFloat(Ttax)}
+       }
+       // console.log('details'+ quantity +'-'+price +'-'+dis );
+       // console.log('cal amount'+ calcObject.amountTax );
+       if (quantity !== '' && price !== '') {
+           if (included) {
+               var amountNew =  parseFloat(dprice)  / ((tax / 100) + 1);
+               calcObject.amountTax = (parseFloat(dprice) - parseFloat(amountNew))  ;
+               calcObject.amountTotal = amountNew.toFixed(2);
+           //   console.log("dh")  
+           }
+           
+           $('#total_'+id).val(parseFloat(calcObject.amountTotal).toFixed(2));
+       } else {
+               $('#total_'+id).val(calcObject.amountNull);
+       }
+       // console.log('cal tax'+ calcObject.amountTax+'-'+id);
+       // console.log('cal toal'+ calcObject.amountTotal+'-'+id );
+       // console.log('amount '+calcObject.amountTax+'-'+id);
+        
+       
+       if (taxtype == '1'){
+       var num  = dprice - calcObject.amountTax;
+       var ttax = quantity * calcObject.amountTax;
+       // console.log( 'price ='+calcObject.amountTax);
+       } else { var num  = dprice;
+       var ttax = Ttax;
+       // console.log( 'price ='+calcObject.amountTax);
+    }
+       var taxable = amount - ttax;
+      
+       if( pos == '1'){ 
+           var halftax = ttax / 2;
+           $('#cgst_'+id).val(halftax.toFixed(4));
+           $('#sgst_'+id).val(halftax.toFixed(4));
+           $('#igst_'+id).val('0');
+       }else { 
+         $('#cgst_'+id).val('0');
+           $('#sgst_'+id).val('0');
+           $('#igst_'+id).val(ttax.toFixed(4))
+       }
+           // console.log( num );
+       $('#taxable_'+id).val(taxable.toFixed(4));
+       $('#fprice_'+id).val(num.toFixed(4));
+       $('#tax_'+id).val(ttax.toFixed(4));
+       
+          var dd=  $('#dis_'+id).val();
+
+       if(dd==3){
+           $('#total_'+id).val(0.00);	
+       }else{
+           $('#total_'+id).val(amount.toFixed(2));	
+       }
+       
+       var margin = purchase_total-amount;
+       $('#margin_'+id).val(margin.toFixed(2));
+       calculateTotal()
+       calculateTotal_new()
+     }
+         var total=0;
+   function calculateTotal(){
+  
+
+       ttax =0;
+     total=0;
+       var totalpv=0;
+       var ptotal=0; 
+       var totalmargin=0;
+               $('.totalLinePrice').each(function() {
+                   if($(this).val() != '' )total+= parseFloat( $(this).val() );
+                 });
+
+                 console.log(total);
+               $('.totalLinePprice').each(function() {
+                   if($(this).val() != '' )ptotal+= parseFloat( $(this).val() );
+                 });
+                 $('.totalmargin').each(function() {
+                   if($(this).val() != '' )totalmargin+= parseFloat( $(this).val() );
+                 });
+                 $('#ptotalAftertax').val(ptotal.toFixed(2));
+                 $('#margin_total').val(totalmargin.toFixed(2));
+           $('.totalpv_calc').each(function() {
+                   if($(this).val() != '' )totalpv+= parseFloat( $(this).val() );
+                 });
+                 $('#totalpv').val(totalpv.toFixed(2));
+
+       
+     var tot2 = Math.round(total);
+     var tot3 = total-tot2; 
+     $('#totalAftertax').val( total.toFixed(2) );
+     
+
+           $('#o_total').val( total.toFixed(2) );
+           $('.totalLineTax').each(function() {
+                   if($(this).val() != '' )ttax += parseFloat( $(this).val() );
+                 });
+           
+           $('#TaxTotal').val( ttax.toFixed(2) );
+  
+   }	
+   function calculateTotal_new(id){
+
+
+       ttax =0;
+     total=0;
+       var totalpv=0;
+       var ptotal=0; 
+       var totalmargin=0;
+               $('.totalLinePrice').each(function() {
+                   if($(this).val() != '' )total+= parseFloat( $(this).val() );
+                 });
+
+             
+               $('.totalLinePprice').each(function() {
+                   if($(this).val() != '' )ptotal+= parseFloat( $(this).val() );
+                 });
+                 $('.totalmargin').each(function() {
+                   if($(this).val() != '' )totalmargin+= parseFloat( $(this).val() );
+                 });
+                 $('#ptotalAftertax').val(ptotal.toFixed(2));
+                 $('#margin_total').val(totalmargin.toFixed(2));
+           $('.totalpv_calc').each(function() {
+                   if($(this).val() != '' )totalpv+= parseFloat( $(this).val() );
+                 });
+                 $('#totalpv').val(totalpv.toFixed(2));
+
+       
+              
+   
+
+     var tot2 = Math.round(total);
+     var tot3 = total-tot2; 
+     $('#totalAftertax').val( total.toFixed(2) );
+     
+
+        const pre_gst=(id)=>{
+
+         const total = $('#totalAftertax').val()
+         let gst1 = $("#gst1").val();
+         let gst2 = $("#gst2").val();
+
+        if(id=="gst1"){
+
+          let main = gst1-100;
+           let secon =  Math.abs(main);
+            $("#gst2").val(secon);
+
+        }else if(id=="gst2"){
+
+                 let main = gst2-100;
+                 let secon =  Math.abs(main);
+                 $("#gst1").val(secon);
+        }
+
+
+        let gst3 = $("#gst1").val();
+         let gst4 = $("#gst2").val();
+
+        var  tt_val_1 = (total * gst3)/100;
+        var  tt_val_2 =  (total * gst4)/100;
+
+        $("#gst_value").val(tt_val_1.toFixed(2));
+        $("#non_gst_value").val(tt_val_2.toFixed(2));
+
+        }
+
+        const sgst_cgst_igst_pre = (id) =>{
+
+      const sgst =    $("#sgst1").val();
+      const cgst =  $("#cgst1").val();
+      const igst =  $("#igst1").val();
+      const total = $("#gst_value").val();
+
+          if (id=="igst1") {
+            $("#sgst1").val(0);
+            $("#cgst1").val(0);
+
+          } else if(id=="sgst1"){
+          $("#igst1").val(0);
+          $("#cgst1").val(sgst);
+          } else if(id=="cgst1") {
+            $("#igst1").val(0);
+            $("#sgst1").val(cgst);
+          }
+
+
+        }
+
+const sgst_cgst_igst_value = () =>{
+      const sgst =    $("#sgst1").val();
+      const cgst =  $("#cgst1").val();
+      const igst =  $("#igst1").val();
+      const total = $("#gst_value").val();
+
+           let  tt_val_1 =  (total * sgst)/100;    
+           let  tt_val_2 =  (total * igst)/100; 
+           
+           $("#sgst_value").val(tt_val_1.toFixed(2));   
+           $("#cgst_value").val(tt_val_1.toFixed(2));   
+           $("#igst_value").val(tt_val_2.toFixed(2));   
+
+
+
+}
+const total_cal = (id) =>{
+   
+  console.log("called");
+
+  let total =$("#totalAftertax").val();
+  const taxtype =$("#mtax_type").val();
+
+      let v1  =   parseInt(  $("#sgst_value").val()  ) 
+      let v2  =    parseInt(  $("#cgst_value").val() )  
+      let v3  =   parseInt(   $("#igst_value").val())
+
+        
+
+           if (taxtype == '1'){
+             total = total;
+             $("#totalAftertax").val(total);
+             console.log(1);
+             }
+           if (taxtype == '2'){
+            console.log(2);
+            total =  parseFloat(total) + parseFloat(v1+v2+v3)
+            console.log(v1,v2,v3);
+             console.log(total);
+             $("#totalAftertax").val(total);
+
+             }
+
+          
+}
+
+const fr_load_charges = (id) =>{
+   
+  console.log(id);
+
+  let total =$("#totalAftertax").val();
+  
+  
+    let sub_total_1 = $("#loading_charges").val();
+    
+    if(sub_total_1==""){
+        sub_total_1=0;
+    }
+    
+    let sub_tota_2 = $("#freight_charges").val();
+    
+
+    if(sub_tota_2==""){
+        sub_tota_2=0;
+    }
+ 
+         $("#totalAftertax").val(parseInt(sub_total_1)+parseInt(sub_tota_2)+parseInt(total));
+        
+         
+}
+
+
+
+const dis_cal = (id) =>{
+    
+      console.log(id);
+      
+      let total =$("#totalAftertax").val();
+      let dis =$("#discount").val();
+      
+       total = total - dis;
+       
+       $("#totalAftertax").val(total);
+}
+
+pre_gst(id);
+sgst_cgst_igst_pre(id);
+sgst_cgst_igst_value(id);
+total_cal(id);
+fr_load_charges(id);
+dis_cal(id);
+     
+
+
+           $('#o_total').val( total.toFixed(2) );
+           $('.totalLineTax').each(function() {
+                   if($(this).val() != '' )ttax += parseFloat( $(this).val() );
+                 });
+           
+           $('#TaxTotal').val( ttax.toFixed(2) );
+  
+   }	
+
+
+     
+
+    $('#mtax_type').change(function (){
+       var row = $('#demo tr').length;
+       for(k=1;k<=row;k++)
+        {
+           gst_calc(k);
+           
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $(document).on('keyup change select blur click','.changesno_new',function(){
+
+      calculateTotal()
+      calculateTotal_new($(this).attr('id'));
+
+    })
+
+
+
+
+  $(document).ready(function() {
+    // anline();
+
+    initiate_functions();
+  });
+     
+   
+   $("#save_form").click(function (){
+           $('#mymodal11').modal('hide');
+  swal({
+  onOpen: () => {
+    swal.showLoading()  } 
+});
+      var form = $('#purchesh_order')[0];
+
+          var data = new FormData(form);
+        data.append('type',1);
+        data.append('cid',"<?php echo $cid; ?>");
+         $.ajax({
+	          url: "../api/ajax/purchase_order_ajax.php",
+	            data:data,
+                processData: false,
+                 contentType: false,
+                cache: false,
+	            type:"POST",
+	           success: function( data ) { 
+	                console.log(data);
+
+           swal.close();
+	              swal("Successful!", "Invoice has been saved", "success");
+        window.location.href="purchase_order";
+ }
+        });
+  
+});
+
+   
+   $("#save_form_edit").click(function (){
+           $('#mymodal11').modal('hide');
+  swal({
+  onOpen: () => {
+    swal.showLoading()  } 
+});
+      var form = $('#purchesh_order_edit')[0];
+
+          var data = new FormData(form);
+        data.append('type',1);
+        data.append('cid',"<?php echo $cid; ?>");
+         $.ajax({
+	          url: "../api/ajax/purchase_order_ajax.php",
+	            data:data,
+                processData: false,
+                 contentType: false,
+                cache: false,
+	            type:"POST",
+	           success: function( data ) { 
+	                  console.log(data);
+
+           swal.close();
+	              swal("Successful!", "Invoice has been saved", "success");
+        window.location.href="purchase_order";
+ }
+        });
+  
+});
+
+   
+     
+     
+ function initiate_functions(){    
+ 
+
+
+
+  $(".auto_itemgroup").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "1",
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+		  	var value = ui.item.value;
+		  	
+		       id_arr = $(this).attr('id')
+                  id1 = id_arr.split("_")
+                    id = id1[2];
+
+                      console.log(id);
+		  	
+		  	$("#item_group_"+id).val(label);
+		  	
+
+    }
+    
+});
+
+
+
+  $(".auto_item").click(function() {
+      
+      
+		  	        id_arr = $(this).attr('id');
+		  	          console.log(id_arr);
+                  id1 = id_arr.split("_");
+                    id = id1[1];
+
+                      console.log(id);
+		  	
+		 var itemgroup_value = 	$("#item_group_"+id).val();
+      
+            $(".auto_item").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "2",
+		    itemgroup_value :itemgroup_value,
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+		  	
+		  	console.log(label);
+		  	
+		  	
+		  	        id_arr = $(this).attr('id')
+                  id1 = id_arr.split("_")
+                    id = id1[1];
+
+                      console.log(id);
+		  	
+		  	$("#item_"+id).val(label);
+
+
+    }
+    
+});
+  });
+
+
+       
+   $(".auto_brand").click(function() {
+      
+      
+		  	        id_arr = $(this).attr('id');
+		  	          console.log(id_arr);
+                  id1 = id_arr.split("_");
+                    id = id1[1];
+
+                      console.log(id);
+		  	
+		 var itemgroup_value = 	$("#item_group_"+id).val();
+   
+         $(".auto_brand").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "12",
+		      itemgroup_value :itemgroup_value,
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+
+		  	$("#site").val(label);
+		 	var label = ui.item.label;
+
+
+        var  id_arr = $(this).attr('id');
+
+     var id1 = id_arr.split("_");
+      var  id = id1[1];
+	  $("#brand_"+id).val(ui.item.label);
+
+ 
+    }
+
+});
+
+
+});
+     
+       
+   $(".auto_uom").click(function() {
+      
+      
+		  	        id_arr = $(this).attr('id');
+		  	          console.log(id_arr);
+                  id1 = id_arr.split("_");
+                    id = id1[1];
+
+                      console.log(id);
+		  	
+		 var itemgroup_value = 	$("#item_group_"+id).val();
+		 
+		   $(".auto_uom").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "111",
+		    itemgroup_value :itemgroup_value,
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+		  	
+		  	console.log(label);
+		  	
+		  	
+		  	        id_arr = $(this).attr('id')
+                  id1 = id_arr.split("_")
+                    id = id1[1];
+
+                      console.log(id);
+		  	
+		  	$("#uom_"+id).val(label);
+
+
+    }
+    
+});
+		 })
+
+
+
+
+
+
+  $("#Supplier").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "77",
+		   
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+		  		  	var id = ui.item.id;
+ 
+		  	$("#Supplier").val(label);
+		  	$("#supplier_address").val(ui.item.address);
+		  	
+		  	let PRE =ui.item.sname
+		  	
+		  	PRE="PO"+'-'+22+"-"+PRE+"-";
+		  	
+	
+		     
+		     
+		             $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+  
+		    type : "771",
+		   
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+              
+              let mk=0;
+              
+              if(data.id>0){
+                  
+                  mk=data.id
+ 
+              }else{
+                  mk=0;
+              }
+
+                        
+                        let value = parseInt(mk) + 1; 
+                        
+                          let kk = ''+value;
+                          let kkk = '';
+                          
+                        
+                              console.log(kk.length)
+                              
+                              if(kk.length==1){
+                                  kkk="000"
+                              }else if(kk.length==2){
+                                   kkk="00";
+                              
+                              }else if(kk.length==3){
+                                   kkk="0";
+                              
+                              }else if(kk.length==4){
+                                   kkk="";
+                              }
+                        
+                        value = kkk+value;
+                         
+                         PRE= PRE+value;
+
+                   	  	$("#po_no").val(PRE);
+
+          }
+        });
+		  
+
+
+    }
+    
+});
+
+  $("#site_del_to").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "11211",
+		   
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+		  		  	var id = ui.item.id;
+ 
+		  	$("#site_del_to").val(label);
+		  	
+		  	sub_add(id)
+		  	
+	
+
+
+
+    }
+    
+});
+
+
+function sub_add(id){
+        console.log(id);
+           $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+		    type : "11212",
+		    id : id,
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+
+              console.log(data);
+              
+              	  	$("#delivery_address").val(data[0].address);
+      
+          }
+        });
+}
+
+
+  $(".product_auto").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "112",
+		   
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+
+		
+		 	var label = ui.item.label;
+
+
+        var  id_arr = $(this).attr('id');
+
+     var id1 = id_arr.split("_");
+      var  id = id1[1];
+	  $("#pname_"+id).val(ui.item.label);
+	    
+
+ 
+    }
+
+});
+
+
+  $("#po_no").autocomplete({
+
+	minLength: 0,
+	autoFocus: true,
+	source: function( request, response ) {
+        $.ajax( {
+          type: "POST",
+            url: "../api/ajax/purchase_request_ajax.php",
+          dataType: "json",
+          data: {
+            term: request.term,
+		    type : "113",
+		   
+		    cid:<?php echo $cid; ?>
+		        },
+          success: function( data ) {  
+              
+              console.log(data);
+      
+ if(!data.length){
+      var data = [
+      {
+      label: 'No matches found', 
+      value: response.term
+      }
+     ];
+ } response( data );
+          }
+        });
+      },
+
+      select: function( event, ui ) {
+          
+            event.preventDefault();
+		  	var label = ui.item.label;
+		  	
+		  	console.log(label);
+
+		  	
+		  	$("#po_no").val(label);
+
+
+
+    }
+    
+});
+
+    
+
+}
+
+
+//  ----------------------------preview modual----------------------------------------------------
+
+
+    $("#prv_btn").click(function (){
+        
+        
+        var form = $('#purchesh_order')[0];
+
+          var data = new FormData(form);
+        data.append('type',4);
+        data.append('cid',"<?php echo $cid; ?>");
+         $.ajax({
+	          url: "../api/ajax/purchase_order_ajax.php",
+	            data:data,
+                processData: false,
+                 contentType: false,
+                cache: false,
+	            type:"POST",
+	           success: function( data ) { 
+	                console.log(data);
+	                        
+         $("#sub_table").html(data);
+         
+          $("#main_head_po").html($("#po_no").val());
+          $("#main_head_date").html($("#date").val());
+          $("#head_suplier").html($("#Supplier").val());
+         
+              $("#head_total").html($("#totalAftertax").val());
+              $("#head_net").html($("#totalAftertax").val());
+              $("#head_date").html($("#request_date").val());
+              $("#head_pol").html("1-1");
+              $("#head_title").html($("#site_del_to").val());
+              $("#head_address").html($("#delivery_address").val());
+              
+              
+              
+              $("#subtotal").html($("#totalAftertax").val());
+              $("#gst").html($("#gst_value").val());
+              
+          if($('#cgst_value').val()==0){
+               $("#gst_type_1").html("IGST");
+              $("#gst_value_1").html($("#igst_value").val());
+          }    
+          if($('#igst_value').val()==0){
+               $("#gst_type_1").html("SGST / CGST");
+              $("#gst_value_1").html($("#cgst_value").val());
+          }    
+             
+              
+              $("#bottom_total").html($("#totalAftertax").val());
+              $("#bottom_amount").html($("#totalAftertax").val());
+              
+         
+         $('#mymodal11').modal('show');
+         
+     
+
+ }
+        });
+        
+
+        
+    })
+
+    
+
+</script>
+
+
+
+
+
